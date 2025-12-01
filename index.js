@@ -1,4 +1,5 @@
 let watchlists = JSON.parse(localStorage.getItem("watchlists"))||[];
+let api_keys= "xxxxxxx"
 document.getElementById('watchlist').textContent = watchlists.length
 document.addEventListener('click',e=>{
     if(e.target.dataset.watch)
@@ -24,12 +25,12 @@ inp.addEventListener('input',(e)=>{
 
 
 async function func(v){
-     const fd = await fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=f8450963&s=${v}&type=movie`)
+     const fd = await fetch(`https://www.omdbapi.com/?apikey=${api_keys}&s=${v}&type=movie`)
      const data = await fd.json()
      const movdiv = document.getElementById('movies')
      movdiv.innerHTML = (await Promise.all(
     data.Search.map(async (e2, i) => {
-        const fd2 = await fetch(`https://www.omdbapi.com/?apikey=f8450963&i=${e2.imdbID}`);
+        const fd2 = await fetch(`https://www.omdbapi.com/?apikey=${api_keys}&i=${e2.imdbID}`);
         const movie = await fd2.json();
         console.log(movie)
         let text =  `favorite`
