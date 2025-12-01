@@ -1,11 +1,11 @@
 let watchlists = JSON.parse(localStorage.getItem("watchlists")) || [];
 let movieCache = {};   // ONLY IN MEMORY
-
+let api_key = "xxxxxxxx"
 (async function initWatchlist() {
 
     // Step 1 — fetch full movie data for each ID
     for (let id of watchlists) {
-        const fd = await fetch(`https://www.omdbapi.com/?apikey=f8450963&i=${id}`);
+        const fd = await fetch(`https://www.omdbapi.com/?apikey=${api_key}&i=${id}`);
         const movie = await fd.json();
         movieCache[id] = movie;
     }
